@@ -31,7 +31,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(data)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<User>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<User>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<User> GetCurrentUserAsync()

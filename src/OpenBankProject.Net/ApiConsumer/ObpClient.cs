@@ -30,7 +30,7 @@ namespace OpenBankProject.Net
                     .PutJsonAsync(data)
                     .ConfigureAwait(false);
 
-                var enable = await HandleResponseAsync<Enable>(response).ConfigureAwait(false);
+                var enable = await HandleResponseAsync<Enable>(response.ResponseMessage).ConfigureAwait(false);
                 return enable.Enabled;
             }
             catch (FlurlHttpException ex)
@@ -86,7 +86,7 @@ namespace OpenBankProject.Net
                     .PutJsonAsync(data)
                     .ConfigureAwait(false);
 
-                return await HandleResponseAsync<Consumer>(response).ConfigureAwait(false);
+                return await HandleResponseAsync<Consumer>(response.ResponseMessage).ConfigureAwait(false);
             }
             catch (FlurlHttpException ex)
             {

@@ -13,7 +13,7 @@ namespace OpenBankProject.Net
 {
     public partial class ObpClient
     {
-        private static readonly ISerializer s_serializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+        //private static readonly ISerializer s_serializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
 
         private const string VERSION = "v3.1.0";
 
@@ -39,7 +39,7 @@ namespace OpenBankProject.Net
                 .SendAsync(HttpMethod.Post)
                 .ConfigureAwait(false);
 
-            var loginToken = await HandleResponseAsync<LoginToken>(response).ConfigureAwait(false);
+            var loginToken = await HandleResponseAsync<LoginToken>(response.ResponseMessage).ConfigureAwait(false);
             return loginToken.Token;
         }
 
@@ -56,7 +56,8 @@ namespace OpenBankProject.Net
             .WithHeader("Content-Type", "application/json")
             .WithHeader("Accept", "application/json")
             .AppendPathSegment($"/obp/{VERSION}")
-            .ConfigureRequest(settings => settings.JsonSerializer = s_serializer);
+            .WithSettings(settings => settings.JsonSerializer =
+                settings.JsonSerializer = new DefaultJsonSerializer(new System.Text.Json.JsonSerializerOptions()));
 
         private async Task<TResult> ReadResponseContentAsync<TResult>(HttpResponseMessage responseMessage, Func<string, TResult> contentHandler = null)
         {

@@ -23,7 +23,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(atm)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<Atm>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<Atm>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<Atm> GetBankAtmAsync(string bankId, string atmId)

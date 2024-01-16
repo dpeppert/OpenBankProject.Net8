@@ -23,7 +23,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(customerSocialMediaHandle)
                 .ConfigureAwait(false);
 
-            var result = await HandleResponseAsync<SuccessResponse>(response).ConfigureAwait(false);
+            var result = await HandleResponseAsync<SuccessResponse>(response.ResponseMessage).ConfigureAwait(false);
             return result.Success == "Success";
         }
 
@@ -34,7 +34,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(customerWithUserId)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<Customer>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<Customer>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<UserCustomerLink> LinkUserToCustomerAsync(string bankId, string userId, string customerId)
@@ -50,7 +50,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(data)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<UserCustomerLink>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<UserCustomerLink>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<CrmEvent>> GetCrmEventsAsync(string bankId)

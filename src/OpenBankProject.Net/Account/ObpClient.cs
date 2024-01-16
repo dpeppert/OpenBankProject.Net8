@@ -22,7 +22,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(account)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<CreateAccount>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<CreateAccount>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<Account> GetAccountByIdAsync(string bankId, string accountId)
@@ -157,7 +157,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(data)
                 .ConfigureAwait(false);
 
-            var result = await HandleResponseAsync<SuccessResponse>(response).ConfigureAwait(false);
+            var result = await HandleResponseAsync<SuccessResponse>(response.ResponseMessage).ConfigureAwait(false);
             return result.Success == "Success";
         }
     }

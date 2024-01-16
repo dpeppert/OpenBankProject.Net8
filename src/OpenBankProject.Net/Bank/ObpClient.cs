@@ -22,7 +22,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(bank)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<Bank>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<Bank>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<CreditLimitOrder> CreateCreditLimitOrderAsync(string bankId, string customerId, 
@@ -33,7 +33,7 @@ namespace OpenBankProject.Net
                 .PostJsonAsync(creditLimitOrderRequest)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<CreditLimitOrder>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<CreditLimitOrder>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<TransactionType> CreateTransactionTypeAsync(string bankId, TransactionTypeRequest transactionTypeRequest)
@@ -43,7 +43,7 @@ namespace OpenBankProject.Net
                 .PutJsonAsync(transactionTypeRequest)
                 .ConfigureAwait(false);
 
-            return await HandleResponseAsync<TransactionType>(response).ConfigureAwait(false);
+            return await HandleResponseAsync<TransactionType>(response.ResponseMessage).ConfigureAwait(false);
         }
 
         public async Task<Bank> GetBankAsync(string bankId)

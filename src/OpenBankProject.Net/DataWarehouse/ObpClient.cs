@@ -29,7 +29,7 @@ namespace OpenBankProject.Net
                     .PostJsonAsync(queryExpression)
                     .ConfigureAwait(false);
 
-                return await HandleResponseAsync<string>(response).ConfigureAwait(false);
+                return await HandleResponseAsync<string>(response.ResponseMessage).ConfigureAwait(false);
             }
             catch (FlurlHttpException ex)
             {
@@ -50,7 +50,7 @@ namespace OpenBankProject.Net
                     .PostJsonAsync(queryExpression)
                     .ConfigureAwait(false);
 
-                return await HandleResponseAsync<string>(response).ConfigureAwait(false);
+                return await HandleResponseAsync<string>(response.ResponseMessage).ConfigureAwait(false);
             }
             catch (FlurlHttpException ex)
             {
